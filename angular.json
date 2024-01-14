@@ -68,6 +68,9 @@
               "buildTarget": "security:build:development"
             }
           },
+          "options": {
+            "port": 4955
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
@@ -97,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
