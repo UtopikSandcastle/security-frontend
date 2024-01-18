@@ -1,1 +1,15 @@
-<p>access-control-system works!</p>
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ accessControlSystem?.Name }}</mat-card-title>
+    <!-- <mat-card-subtitle>Card Subtitle</mat-card-subtitle> -->
+  </mat-card-header>
+  <!-- <img mat-card-image src="path-to-your-image.jpg" alt="Image description"> -->
+  <mat-card-content>
+    <app-access-control-device *ngFor="let accessControlDevice of accessControlDevices" 
+      [accessControlDevice]="accessControlDevice"></app-access-control-device>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <!-- <button mat-button>Edit</button> -->
+  </mat-card-actions>
+</mat-card>

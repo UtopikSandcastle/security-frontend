@@ -1,30 +1,31 @@
-// import { HttpClientModule } from '@angular/common/http';
+import { AccessControlSystem, AccessControlSystemService } from '@utopiksandcastle/accesscontrol-api-client';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-// import { ApiModule } from '@utopiksandcastle/accesscontrol-api-client';
-// import { environment } from '../../environments/environment';
-// import { AccessControlDeviceService, AccessControlSystemService } from '@utopiksandcastle/accesscontrol-api-client';
+
+import { AccessControlSystemComponent } from './elements/access-control-system/access-control-system.component';
+import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, HttpClientModule, AccessControlSystemComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
+  providers: [AccessControlSystemService]
 })
 export class DashboardComponent implements OnInit {
-  // accessControlDevices: AccessControlDevice[] = []
-  // accessControlSystems: AccessControlSystem[] = []
+  accessControlSystems: AccessControlSystem[] = []
 
-  // constructor(
-  //   private accesControleDeviceService: AccessControlDeviceService,
-  //   private accesControleSystemService: AccessControlSystemService) {
-  // }
+  constructor(private accesControleSystemService: AccessControlSystemService) {
+    accesControleSystemService.configuration.basePath = environment.apiBaseUrl;
+  }
 
   ngOnInit(): void {
-    console.log("ok");
-    //   this.accesControleSystemService.apiV1AccessControlSystemGet().subscribe(
-    //     data => this.accessControlDevices = data,
-    //     error => console.error('Error fetching data', error)
-    //   )
+    this.accesControleSystemService.apiV1AccessControlSystemGet().subscribe({
+      next: (value) => { this.accessControlSystems = value },
+      error: (error) => console.error(error),
+      complete: () => console.info(`${this.accessControlSystems.length} Access Control Systems loaded.`)
+    })
   }
 }

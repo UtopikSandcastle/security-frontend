@@ -32,20 +32,21 @@ module.exports = {
       name: "security",
       filename: "remoteEntry.js",
       exposes: {
+        './routes': 'src/app/app.routes.ts',
         './Component': './/src/app/app.component.ts',
       },
-      
-      shared: {
-        ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
-      },
-      // shared: share({
-      //   "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-      //   "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-      //   "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-      //   "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-      //   "@utopiksandcastle/accesscontrol-api-client": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-      //   ...sharedMappings.getDescriptors()
-      // })
+
+      // shared: {
+      //   ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+      // },
+      shared: share({
+        "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@utopiksandcastle/accesscontrol-api-client": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        ...sharedMappings.getDescriptors()
+      })
 
     }),
     sharedMappings.getPlugin()
