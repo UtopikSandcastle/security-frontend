@@ -1,28 +1,25 @@
-import { AccessControlSystem, AccessControlSystemService } from '@utopiksandcastle/accesscontrol-api-client';
+import { AccessControlSystem } from '@utopiksandcastle/accesscontrol-api-client';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { AccessControlSystemComponent } from './elements/access-control-system/access-control-system.component';
-import { HttpClientModule } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, AccessControlSystemComponent],
+  imports: [CommonModule, AccessControlSystemComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
-  providers: [AccessControlSystemService]
+  providers: []
 })
 export class DashboardComponent implements OnInit {
   accessControlSystems: AccessControlSystem[] = []
 
-  constructor(private accesControleSystemService: AccessControlSystemService) {
-    accesControleSystemService.configuration.basePath = environment.apiBaseUrl;
-  }
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.accesControleSystemService.apiV1AccessControlSystemGet().subscribe({
+    this.apiService.accessControlSystemService.apiV1AccessControlSystemGet().subscribe({
       next: (value) => { this.accessControlSystems = value },
       error: (error) => console.error(error),
       complete: () => console.info(`${this.accessControlSystems.length} Access Control Systems loaded.`)

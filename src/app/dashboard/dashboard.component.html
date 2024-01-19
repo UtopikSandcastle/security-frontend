@@ -1,7 +1,8 @@
-<!-- dashboard.component.html -->
 <div class="dashboard-grid">
-  <!-- <app-alert *ngFor="let alert of alerts" [alertData]="alert"></app-alert> -->
-  <app-access-control-system *ngFor="let accessControlSystem of accessControlSystems"
-    [accessControlSystem]="accessControlSystem"></app-access-control-system>
-  <!-- Other element types -->
+  <div *ngIf="accessControlSystems.length; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+    <app-access-control-system *ngFor="let accessControlSystem of accessControlSystems"
+      [accessControlSystem]="accessControlSystem"></app-access-control-system>
+  </ng-template>
+  <ng-template #elseBlock>No system found.</ng-template>
 </div>

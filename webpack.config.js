@@ -32,8 +32,8 @@ module.exports = {
       name: "security",
       filename: "remoteEntry.js",
       exposes: {
-        './routes': 'src/app/app.routes.ts',
-        './Component': './/src/app/app.component.ts',
+        './routes': './src/app/app.routes.ts',
+        './AppComponent': './src/app/app.component.ts',
       },
 
       // shared: {
