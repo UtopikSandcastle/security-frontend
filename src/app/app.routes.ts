@@ -9,7 +9,13 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () =>
-      import('./dashboard/dashboard.component')
+      import('./pages/dashboard/dashboard.component')
         .then(m => m.DashboardComponent)
+  },
+  {
+    path: 'management',
+    loadComponent: () =>
+      import('./pages/management/management.component')
+        .then(m => m.ManagementComponent)
   }
 ];

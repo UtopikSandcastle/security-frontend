@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from "@angular/material/button";
 import { AccessControlDeviceComponent } from '../access-control-device/access-control-device.component';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../../api.service';
+import { ApiService } from '../../api.service';
 import { AccessControlSystem, AccessControlDevice } from '@utopiksandcastle/accesscontrol-api-client';
 
 @Component({

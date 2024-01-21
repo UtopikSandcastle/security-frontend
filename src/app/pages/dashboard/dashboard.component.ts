@@ -2,8 +2,8 @@ import { AccessControlSystem } from '@utopiksandcastle/accesscontrol-api-client'
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import { AccessControlSystemComponent } from './elements/access-control-system/access-control-system.component';
-import { ApiService } from '../api.service';
+import { AccessControlSystemComponent } from '../../elements/access-control-system/access-control-system.component';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +16,7 @@ import { ApiService } from '../api.service';
 export class DashboardComponent implements OnInit {
   accessControlSystems: AccessControlSystem[] = []
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.apiService.accessControlSystemService.apiV1AccessControlSystemGet().subscribe({
