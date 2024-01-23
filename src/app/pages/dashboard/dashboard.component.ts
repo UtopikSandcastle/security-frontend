@@ -1,8 +1,7 @@
 import { AccessControlSystem } from '@utopiksandcastle/accesscontrol-api-client';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-
-import { AccessControlSystemComponent } from '../../elements/access-control-system/access-control-system.component';
+import { AccessControlSystemComponent } from '../../components/access-control-system/access-control-system.component';
 import { ApiService } from '../../api.service';
 
 @Component({
