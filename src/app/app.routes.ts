@@ -1,21 +1,23 @@
 import { Routes } from '@angular/router';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ManagementComponent } from './pages/management/management.component';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: 'dashboard',
-    loadComponent: () =>
-      import('./pages/dashboard/dashboard.component')
-        .then(m => m.DashboardComponent)
-  },
-  {
-    path: 'management',
-    loadComponent: () =>
-      import('./pages/management/management.component')
-        .then(m => m.ManagementComponent)
+    // redirectTo: 'dashboard',
+    component: AppComponent,
+    // pathMatch: 'full',
+    children:[
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'management',
+        component: ManagementComponent
+      }
+    ]
   }
 ];
