@@ -1,0 +1,13 @@
+<button mat-icon-button color="primary" class="menu-button" [matMenuTriggerFor]="menu">
+  <mat-icon>menu</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [routerLink]="['..', 'dashboard']">
+    <mat-icon>dashboard</mat-icon>
+    <span>Dashboard</span>
+  </button>
+  <button mat-menu-item [routerLink]="['..', 'accesscontrolsystem']">
+    <mat-icon>local_police</mat-icon>
+    <span>Access Control System</span>
+  </button>
+</mat-menu>

@@ -1,3 +1,9 @@
+<mat-toolbar>
+  <app-menu-button></app-menu-button>
+  <h1 class="page-title">{{ pageTitle }}</h1>
+  <span class="spacer"></span>
+</mat-toolbar>
+
 <div class="dashboard-grid">
   <div *ngIf="accessControlSystems.length; then thenBlock else elseBlock"></div>
   <ng-template #thenBlock>
