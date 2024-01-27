@@ -1,0 +1,3 @@
+[submodule "lib/angular-dynamic-form"]
+	path = lib/angular-dynamic-form
+	url = https://github.com/UtopikGoodies/angular-dynamic-form.git
