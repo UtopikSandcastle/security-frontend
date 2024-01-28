@@ -1,0 +1,45 @@
+<h1 mat-dialog-title class="dialog-title">{{ data.title }}</h1>
+<div mat-dialog-content class="dialog-content">
+  <lib-dynamic-form
+    #dynamicFormComponent
+    [formFields]="data.formFields"
+  ></lib-dynamic-form>
+</div>
+<div mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button class="dialog-action-button" (click)="onNoClick()">
+    Cancel
+  </button>
+
+  <!-- <container-element [ngSwitch]="data.action">
+    <button
+      mat-button
+      color="primary"
+      class="dialog-action-button"
+      *ngSwitchCase="Action.Create"
+      (click)="onCreate(dynamicFormComponent.form.value)"
+      cdkFocusInitial
+    >
+      Create
+    </button>
+    <button
+      mat-button
+      color="primary"
+      class="dialog-action-button"
+      *ngSwitchCase="Action.Update"
+      (click)="onUpdate(dynamicFormComponent.form.value)"
+      cdkFocusInitial
+    >
+      Update
+    </button>
+    <button
+      mat-button
+      color="primary"
+      class="dialog-action-button"
+      *ngSwitchCase="Action.Delete"
+      (click)="onDelete(dynamicFormComponent.form.value)"
+      cdkFocusInitial
+    >
+      Delete
+    </button>
+  </container-element> -->
+</div>

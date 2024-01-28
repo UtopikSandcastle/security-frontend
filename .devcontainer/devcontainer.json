@@ -20,6 +20,7 @@
       "extensions": [
         "Angular.ng-template",
         "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
         "ms-vscode.live-server"
       ]
     }

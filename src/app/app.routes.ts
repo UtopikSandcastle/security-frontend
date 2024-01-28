@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AccessControlSystemComponent } from './pages/access-control-system/access-control-system.component';
+import { AccessControlSystemsComponent } from './pages/access-control-systems/access-control-systems.component';
 
 
 export const routes: Routes = [
@@ -16,6 +16,6 @@ export const routes: Routes = [
   },
   {
     path: 'accesscontrolsystem',
-    component: AccessControlSystemComponent
+    component: AccessControlSystemsComponent
   }
 ];

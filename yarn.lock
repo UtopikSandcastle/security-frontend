@@ -3392,10 +3392,10 @@
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.0.tgz"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@utopiksandcastle/accesscontrol-api-client@0.0.1-alpha.2":
-  version "0.0.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/@utopiksandcastle/accesscontrol-api-client/-/accesscontrol-api-client-0.0.1-alpha.2.tgz#e39711038ff14f3b69415f8e4a1119a7b366a057"
-  integrity sha512-4ae6VVZL3rAOtAjWNE7qf8YLm06qyFpX/E0lzVkVVk4ZMqq8soHSgPrk92L8CGUhFerOMAqM9r2NvRF0quv6wg==
+"@utopiksandcastle/accesscontrol-api-client@0.0.0-pr.22":
+  version "0.0.0-pr.22"
+  resolved "https://npm.pkg.github.com/download/@utopiksandcastle/accesscontrol-api-client/0.0.0-pr.22/3a6623a0a04d25e4f5e93ac09e6ae314ea8f585f#3a6623a0a04d25e4f5e93ac09e6ae314ea8f585f"
+  integrity sha512-shc3TNOaXjKoaYtT4Cahu7HRGc1AJ6TJ5iycr98iAPKoB0gjMj0dd0W8/KVhJ9qL806dP1vrP8d+0rXUrKrFlw==
   dependencies:
     tslib "^2.3.0"
 
