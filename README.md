@@ -25,3 +25,15 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Package development version
+Create a file named `.npmrc` within the folowwing:
+```ini
+@utopiksandcastle:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${READ_PACKAGE_TOKEN}
+```
+Set the environement variable READ_PACKAGE_TOKEN to your GitHub personnal token:
+```
+export READ_PACKAGE_TOKEN=ghp_XXX
+```

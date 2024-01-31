@@ -5,18 +5,19 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AccessControlSystem } from '@utopiksandcastle/accesscontrol-api-client';
 
-import { CrudDialogComponent } from '../../components/crud-dialog/crud-dialog.component';
 import { MenuButtonComponent } from '../../components/menu-button/menu-button.component';
 import {
+  DynamicDialogComponent,
   DynamicFormComponent,
   FormFieldInput,
+  FormFieldArray,
 } from '../../../../lib/angular-dynamic-form/projects/dynamic-form/src/public-api';
 
 @Component({
   selector: 'app-access-control-systems',
   standalone: true,
   imports: [
-    CrudDialogComponent,
+    DynamicDialogComponent,
     DynamicFormComponent,
     MatButtonModule,
     MatDialogModule,
@@ -29,7 +30,6 @@ import {
 })
 export class AccessControlSystemsComponent {
   pageTitle = 'Access Control System';
-  // formFields?: FormFieldBase<string>[];
 
   accessControlSystem: AccessControlSystem = {
     Name: '',
@@ -40,14 +40,14 @@ export class AccessControlSystemsComponent {
 
   openDialogCreate() {
     this.dialog
-      .open(CrudDialogComponent<AccessControlSystem>, {
+      .open(DynamicDialogComponent<AccessControlSystem>, {
         width: '90%',
         data: {
           title: `Create a new ${this.pageTitle}`,
           button: 'Create',
           formFields: [
-            {
-              name: 'Name',
+            new FormFieldInput<string>({
+              name: 'name',
               label: 'Name',
               hint: '',
               icon: '',
@@ -55,7 +55,14 @@ export class AccessControlSystemsComponent {
               required: this.isRequired(this.accessControlSystem.Name),
               type: 'text',
               value: this.accessControlSystem.Name,
-            } as FormFieldInput<string>,
+            }),
+            new FormFieldArray({
+              name: 'accesssystemdevice',
+              label: 'Access System Device',
+              formFields: [
+                new FormFieldInput<string>({ name: 'Subinput', value: '' }),
+              ],
+            }),
           ],
         },
       })
