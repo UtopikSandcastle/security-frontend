@@ -12,6 +12,7 @@ import {
   FormFieldInput,
   FormFieldArray,
 } from '../../../../lib/angular-dynamic-form/projects/dynamic-form/src/public-api';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-access-control-systems',
@@ -39,7 +40,7 @@ export class AccessControlSystemsComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialogCreate() {
-    this.dialog
+    const dialogRef = this.dialog
       .open(DynamicDialogComponent<AccessControlSystem>, {
         width: '90%',
         data: {
@@ -59,15 +60,26 @@ export class AccessControlSystemsComponent {
             new FormFieldArray({
               name: 'accesssystemdevice',
               label: 'Access System Device',
-              formFields: [
-                new FormFieldInput<string>({ name: 'Subinput', value: '' }),
-              ],
+              formField: new FormFieldInput<string>({
+                name: 'Subinput',
+                label: 'Sub Input',
+                value: '',
+              }),
             }),
           ],
         },
       })
-      .afterClosed()
-      .subscribe((result) => console.debug(result));
+      .componentInstance.formFieldValueChange.subscribe({
+        next: (value: any) => console.debug(value),
+        error: (err: any) => console.error(err),
+        complete: () => console.log('Value change complete.'),
+      });
+    // .afterClosed()
+    // .subscribe({
+    //   next: (value) => console.debug(value),
+    //   error: (err) => console.error(err),
+    //   complete: () => {},
+    // });
   }
 
   isRequired<T>(property: T | null): boolean {
