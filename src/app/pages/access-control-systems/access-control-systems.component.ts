@@ -83,45 +83,50 @@ export class AccessControlSystemsComponent {
       });
 
       // Open the dialog with the updated option groups
-      const dialogRef = this.dialog.open(
-        DynamicDialogComponent<AccessControlSystem>,
-        {
-          width: '90%',
-          data: {
-            title: `Create a new ${this.pageTitle}`,
-            button: 'Create',
-            formFields: [
-              new FormFieldInput<string>({
-                name: 'name',
-                title: 'Name',
-                hint: '',
-                icon: '',
-                placeholder: '',
-                required: this.isRequired(this.accessControlSystem.Name),
-                type: 'text',
-                value: this.accessControlSystem.Name,
+      const dialogRef = this.dialog.open(DynamicDialogComponent, {
+        disableClose: true,
+        width: '90%',
+        data: {
+          title: `Create a new ${this.pageTitle}`,
+          button: 'Create',
+          formFields: [
+            new FormFieldInput<string>({
+              name: 'Name',
+              title: 'Name',
+              hint: '',
+              icon: '',
+              placeholder: '',
+              required: this.isRequired(this.accessControlSystem.Name),
+              type: 'text',
+              value: this.accessControlSystem.Name,
+            }),
+            new FormFieldArray({
+              name: 'AccessControlDeviceIds',
+              title: 'Access System Devices',
+              subtitle: '',
+              uniqueValue: true,
+              formField: new FormFieldSelect<string>({
+                name: 'AccesControleDevice',
+                title: 'Acces Controle Device',
+                optionGroups: accessControlDeviceOptionGroups,
               }),
-              new FormFieldArray({
-                name: 'accesssystemdevices',
-                title: 'Access System Devices',
-                subtitle: 'Add',
-                formField: new FormFieldSelect({
-                  name: 'AccesControleDevice',
-                  title: 'Acces Controle Device',
-                  required: true,
-                  optionGroups: accessControlDeviceOptionGroups,
-                }),
-              }),
-            ],
-          },
-        }
-      );
+            }),
+          ],
+        },
+      });
 
-      // Subscribe to form field value changes
-      dialogRef.componentInstance.formFieldValueChange.subscribe({
-        next: (value: any) => console.debug(value),
-        error: (err: any) => console.error(err),
-        complete: () => console.log('Value change complete.'),
+      dialogRef.beforeClosed().subscribe({
+        next: (value) => {
+          console.debug(value);
+          this.apiService.accessControlSystemService
+            .apiV1AccessControlSystemPost(value)
+            .subscribe({
+              next: (value) => console.debug(value),
+              error: (err) => console.error(err),
+              complete: () => {},
+            });
+        },
+        error: (err) => console.error(err),
       });
     } catch (error) {
       console.error(error);
