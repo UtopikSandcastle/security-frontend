@@ -6,8 +6,10 @@
   </mat-card-header>
   <!-- <img mat-card-image src="path-to-your-image.jpg" alt="Image description"> -->
   <mat-card-content>
-    <app-access-control-device *ngFor="let accessControlDevice of accessControlDevices"
+    @for (accessControlDevice of accessControlDevices; track accessControlDevice) {
+      <app-access-control-device
       [accessControlDevice]="accessControlDevice"></app-access-control-device>
+    }
   </mat-card-content>
   <mat-card-actions align="end">
     <!-- <button mat-button>Edit</button> -->

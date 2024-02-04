@@ -5,10 +5,12 @@
 </mat-toolbar>
 
 <div class="dashboard-grid">
-  <div *ngIf="accessControlSystems.length; then thenBlock else elseBlock"></div>
-  <ng-template #thenBlock>
-    <app-access-control-system *ngFor="let accessControlSystem of accessControlSystems"
+  @if (accessControlSystems.length) {
+    @for (accessControlSystem of accessControlSystems; track accessControlSystem) {
+      <app-access-control-system
       [accessControlSystem]="accessControlSystem"></app-access-control-system>
-  </ng-template>
-  <ng-template #elseBlock>No system found.</ng-template>
+    }
+  } @else {
+    No system found.
+  }
 </div>

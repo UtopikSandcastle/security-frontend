@@ -8,9 +8,11 @@
       <mat-label>Ouputs:</mat-label>
       <div>
         <mat-radio-group [disabled]=true aria-label="Select an option">
-          <mat-radio-button *ngFor="let option of accessControlDevice?.Outputs" [value]="option">
-            {{ option }}
-          </mat-radio-button>
+          @for (option of accessControlDevice?.Outputs; track option) {
+            <mat-radio-button [value]="option">
+              {{ option }}
+            </mat-radio-button>
+          }
         </mat-radio-group>
       </div>
     </div>
@@ -18,9 +20,11 @@
       <mat-label>Inputs:</mat-label>
       <div>
         <mat-radio-group [disabled]=true aria-label="Select an option">
-          <mat-radio-button *ngFor="let option of accessControlDevice?.Inputs" [value]="option">
-            {{ option }}
-          </mat-radio-button>
+          @for (option of accessControlDevice?.Inputs; track option) {
+            <mat-radio-button [value]="option">
+              {{ option }}
+            </mat-radio-button>
+          }
         </mat-radio-group>
       </div>
     </div>

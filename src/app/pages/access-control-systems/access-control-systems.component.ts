@@ -96,7 +96,7 @@ export class AccessControlSystemsComponent {
                     formField: new FormFieldSelect({
                       name: 'AccesControleDevice',
                       label: 'Acces Controle Device',
-                      OptionGroup: accessControlDeviceOptionGroups
+                      OptionGroup: accessControlDeviceOptionGroups,
                     }),
                   }),
                 ],

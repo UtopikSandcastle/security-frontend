@@ -1,5 +1,5 @@
 import { AccessControlSystem } from '@utopiksandcastle/accesscontrol-api-client';
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { AccessControlSystemComponent } from '../../components/access-control-system/access-control-system.component';
 import { ApiService } from '../../api.service';
@@ -13,12 +13,11 @@ import { MenuButtonComponent } from '../../components/menu-button/menu-button.co
   standalone: true,
   imports: [
     AccessControlSystemComponent,
-    CommonModule,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
     MenuButtonComponent
-  ],
+],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   providers: []
