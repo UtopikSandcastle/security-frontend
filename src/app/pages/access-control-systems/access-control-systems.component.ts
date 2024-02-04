@@ -93,7 +93,7 @@ export class AccessControlSystemsComponent {
             formFields: [
               new FormFieldInput<string>({
                 name: 'name',
-                label: 'Name',
+                title: 'Name',
                 hint: '',
                 icon: '',
                 placeholder: '',
@@ -102,11 +102,13 @@ export class AccessControlSystemsComponent {
                 value: this.accessControlSystem.Name,
               }),
               new FormFieldArray({
-                name: 'accesssystemdevice',
-                label: 'Access System Device',
+                name: 'accesssystemdevices',
+                title: 'Access System Devices',
+                subtitle: 'Add',
                 formField: new FormFieldSelect({
                   name: 'AccesControleDevice',
-                  label: 'Acces Controle Device',
+                  title: 'Acces Controle Device',
+                  required: true,
                   optionGroups: accessControlDeviceOptionGroups,
                 }),
               }),
