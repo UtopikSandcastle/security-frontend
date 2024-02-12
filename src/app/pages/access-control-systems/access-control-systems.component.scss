@@ -1,3 +1,13 @@
+table {
+  width: 100%;
+}
+
+// td,
+// th {
+//   width: 25%;
+//   max-width: 200px;
+// }
+
 mat-toolbar {
   padding: 0px 10px 0px 10px;
 }
@@ -8,4 +18,53 @@ mat-toolbar {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.max-width-form-field {
+  max-width: 400px; /* Set your desired maximum width here */
+  width: 200px; /* Ensure it takes the full width of the parent container */
+  //   margin: auto; /* Center the form field horizontally if needed */
+  height: 78px;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.custom-toolbar {
+  background-color: transparent !important;
+  //   margin: 0px;
+  padding: 0px;
+  
+}
+
+mat-form-field {
+  margin-top: 16px;
+  // width: 100%;
+  // max-height: 78px;
+}
+
+.clickable {
+  // border-bottom: 1px solid transparent;
+  // border-top: 1px solid transparent;
+  
+  cursor: pointer;
+}
+
+mat-icon{
+  margin: 5px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
