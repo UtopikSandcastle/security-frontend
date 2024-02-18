@@ -1,0 +1,35 @@
+<button mat-icon-button #tooltip="matTooltip" [matTooltip]="accessControlDevice.Name">
+  @switch (accessControlDevice.Type) {
+    @case (AccessControlDeviceType.Drawbridge) {
+      <mat-icon class="button-icon icon-flip-y" [class.open]="!accessControlDevice.Outputs?.[0]"
+        >tools_level</mat-icon
+      >
+    }
+    @case (AccessControlDeviceType.Gate) {
+      <mat-icon class="button-icon icon-flip-y" [class.open]="!accessControlDevice.Outputs?.[0]">comedy_mask</mat-icon>
+    }
+    @case (AccessControlDeviceType.Portcullis) {
+      <mat-icon class="button-icon icon-flip-y" [class.open]="!accessControlDevice.Outputs?.[0]"
+        >fence</mat-icon
+      >
+    }
+    @case (AccessControlDeviceType.PosternGate) {
+      <mat-icon class="button-icon" [class.open]="!accessControlDevice.Outputs?.[0]"
+        >outdoor_garden</mat-icon
+      >
+    }
+    @case (AccessControlDeviceType.Door) {
+      <mat-icon class="button-icon" [class.open]="!accessControlDevice.Outputs?.[0]">gate</mat-icon>
+    }
+    @default {
+      <mat-icon class="button-icon" [class.open]="!accessControlDevice.Outputs?.[0]"
+        >question_mark</mat-icon
+      >
+    }
+  }
+  @if (accessControlDevice.Outputs && accessControlDevice.Outputs[1] != null) {
+    <mat-icon class="icon-status filled" [class.locked]="accessControlDevice.Outputs[1]">{{
+      accessControlDevice.Outputs[1] ? "lock" : "lock_open_right"
+    }}</mat-icon>
+  }
+</button>

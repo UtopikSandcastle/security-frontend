@@ -7,8 +7,8 @@
 <div class="dashboard-grid">
   @if (accessControlSystems.length) {
     @for (accessControlSystem of accessControlSystems; track accessControlSystem) {
-      <app-access-control-system
-      [accessControlSystem]="accessControlSystem"></app-access-control-system>
+      <app-access-control-system-card
+      [accessControlSystem]="accessControlSystem"></app-access-control-system-card>
     }
   } @else {
     No system found.

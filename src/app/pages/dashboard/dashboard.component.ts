@@ -1,18 +1,17 @@
 import { AccessControlSystem } from '@utopiksandcastle/accesscontrol-api-client';
-
 import { Component, OnInit } from '@angular/core';
-import { AccessControlSystemComponent } from '../../components/access-control-system/access-control-system.component';
 import { ApiService } from '../../api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MenuButtonComponent } from '../../components/menu-button/menu-button.component';
+import { AccessControlSystemCardComponent } from '../../components/access-control-system-card/access-control-system-card.component';
 
 @Component({
   selector: 'app-page-dashboard',
   standalone: true,
   imports: [
-    AccessControlSystemComponent,
+    AccessControlSystemCardComponent,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,

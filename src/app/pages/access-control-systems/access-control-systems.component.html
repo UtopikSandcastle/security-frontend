@@ -2,29 +2,22 @@
   <app-menu-button></app-menu-button>
   <h1 class="page-title">{{ pageTitle }}</h1>
   <span class="spacer"></span>
-  <button mat-raised-button color="primary" (click)="openDialogCRUD()">
-    <mat-icon
-      class="material-symbols-outlined"
-      fontIcon="local_police"
-    ></mat-icon>
+  <app-access-control-system-button-crud></app-access-control-system-button-crud>
+  <!-- <button mat-raised-button color="primary" (click)="openDialogCRUD()">
+    <mat-icon class="material-symbols-outlined">local_police</mat-icon>
     New
-  </button>
+  </button> -->
 </mat-toolbar>
 
-<div class="mat-elevation-z8 container">
+<div class="container">
   <mat-toolbar class="custom-toolbar">
     <mat-form-field>
       <mat-label>Filter</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter($event)"
-        placeholder="Ex. ium"
-        #input
-      />
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input />
     </mat-form-field>
   </mat-toolbar>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td
@@ -32,35 +25,16 @@
         matRipple
         class="clickable"
         *matCellDef="let element"
-        (click)="openDialogCRUD(element)"
+        (click)="openDialog(element)"
       >
         {{ element.Name }}
       </td>
     </ng-container>
-
     <ng-container matColumnDef="accessControlDevices">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Access Control Devices
-      </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Access Control Devices </th>
       <td mat-cell *matCellDef="let element">
-        @for(AccessControlDevice of element.AccessControlDevices; track AccessControlDevice){
-          @switch (AccessControlDevice.Type) {
-            @case (AccessControlDeviceType.Drawbridge) {
-              <mat-icon>tools_level</mat-icon>
-            }
-            @case (AccessControlDeviceType.Gate) {
-              <mat-icon>gate</mat-icon>
-            }
-            @case (AccessControlDeviceType.Portcullis) {
-              <mat-icon>fence</mat-icon>
-            }
-            @case (AccessControlDeviceType.PosternGate) {
-              <mat-icon>sensor_door</mat-icon>
-            }
-            @default {
-              Default case.
-            }
-          }
+        @for (accessControlDevice of element.AccessControlDevices; track accessControlDevice) {
+          <app-access-control-device-button [accessControlDevice]="accessControlDevice"></app-access-control-device-button>
         }
       </td>
     </ng-container>
