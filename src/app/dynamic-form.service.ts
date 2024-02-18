@@ -110,9 +110,7 @@ export class DynamicFormService {
         error: (error) => console.error(error),
       });
 
-      return () => {
-        // console.log("Observable unsubscribed");
-      };
+      return () => {};
     });
   }
 

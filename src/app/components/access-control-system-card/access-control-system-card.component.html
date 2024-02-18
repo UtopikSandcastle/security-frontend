@@ -1,9 +1,17 @@
-<mat-card>
+<mat-card (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
   <mat-card-header>
     <mat-card-title>{{ accessControlSystem?.Name }}</mat-card-title>
-    <!-- <mat-card-subtitle>Card Subtitle</mat-card-subtitle> -->
+    <span class="spacer"></span>
+    @if (isMouseOver) {
+      <button
+        mat-icon-button
+        class="small"
+        (click)="openAccessControlSystemDialog(accessControlSystem)"
+      >
+        <mat-icon class="material-symbols-outlined">settings</mat-icon>
+      </button>
+    }
   </mat-card-header>
-  <!-- <img mat-card-image src="path-to-your-image.jpg" alt="Image description"> -->
   <mat-card-content>
     @for (accessControlDevice of accessControlDevices; track accessControlDevice) {
       <app-access-control-device-button

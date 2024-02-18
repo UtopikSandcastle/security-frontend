@@ -19,10 +19,8 @@ import {
   AccessControlDeviceType,
   AccessControlSystem,
 } from "@utopiksandcastle/accesscontrol-api-client";
-import { DialogAction, DialogOutput, DynamicDialog } from "@utopikgoodies/dynamic-form";
 import { AccessControlDeviceButtonComponent } from "../../components/access-control-device-button/access-control-device-button.component";
 import { DynamicFormService } from "../../dynamic-form.service";
-import { AccessControlSystemButtonCrudComponent } from "../../components/access-control-system-button-crud/access-control-system-button-crud.component";
 
 export enum Action {
   Create = "Create",
@@ -47,7 +45,6 @@ export enum Action {
     MatRippleModule,
     MatTooltipModule,
     AccessControlDeviceButtonComponent,
-    AccessControlSystemButtonCrudComponent,
   ],
   templateUrl: "./access-control-systems.component.html",
   styleUrl: "./access-control-systems.component.scss",
@@ -64,7 +61,9 @@ export class AccessControlSystemsComponent {
   };
 
   dataSource: MatTableDataSource<AccessControlSystem> = new MatTableDataSource();
-  displayedColumns: string[] = ["name", "accessControlDevices"];
+  displayedColumns: string[] = ["name", "accessControlDevices", "actions"];
+
+  mouseOverRow: any;
 
   constructor(
     public dialog: MatDialog,
@@ -111,7 +110,7 @@ export class AccessControlSystemsComponent {
     }
   }
 
-  openDialog(accessControlSystem: AccessControlSystem) {
+  openAccessControlSystemDialog(accessControlSystem: AccessControlSystem | undefined = undefined) {
     this.dynamicFormService.openAccessControlSystemDialog(accessControlSystem).subscribe({
       next: (value) => console.debug(value),
       error: (error) => console.error(error),
@@ -119,5 +118,15 @@ export class AccessControlSystemsComponent {
         this.loadData();
       },
     });
+  }
+
+  onMouseEnter(row: any) {
+    this.mouseOverRow = row;
+    // Additional logic when mouse enters the row
+  }
+
+  onMouseLeave(row: any) {
+    this.mouseOverRow = null;
+    // Additional logic when mouse leaves the row
   }
 }
