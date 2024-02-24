@@ -1,24 +1,24 @@
-<button mat-icon-button #tooltip="matTooltip" [matTooltip]="accessControlDevice.Name">
+<button mat-icon-button #tooltip="matTooltip" [matTooltip]="accessControlDevice.Name" (click)="openDialog(accessControlDevice)">
   @switch (accessControlDevice.Type) {
-    @case (AccessControlDeviceType.Drawbridge) {
+    @case (accessControlDeviceType.Drawbridge) {
       <mat-icon class="button-icon icon-flip-y" [class.open]="!accessControlDevice.Outputs?.[0]"
         >tools_level</mat-icon
       >
     }
-    @case (AccessControlDeviceType.Gate) {
+    @case (accessControlDeviceType.Gate) {
       <mat-icon class="button-icon icon-flip-y" [class.open]="!accessControlDevice.Outputs?.[0]">comedy_mask</mat-icon>
     }
-    @case (AccessControlDeviceType.Portcullis) {
+    @case (accessControlDeviceType.Portcullis) {
       <mat-icon class="button-icon icon-flip-y" [class.open]="!accessControlDevice.Outputs?.[0]"
         >fence</mat-icon
       >
     }
-    @case (AccessControlDeviceType.PosternGate) {
+    @case (accessControlDeviceType.PosternGate) {
       <mat-icon class="button-icon" [class.open]="!accessControlDevice.Outputs?.[0]"
         >outdoor_garden</mat-icon
       >
     }
-    @case (AccessControlDeviceType.Door) {
+    @case (accessControlDeviceType.Door) {
       <mat-icon class="button-icon" [class.open]="!accessControlDevice.Outputs?.[0]">gate</mat-icon>
     }
     @default {
@@ -27,9 +27,9 @@
       >
     }
   }
-  @if (accessControlDevice.Outputs && accessControlDevice.Outputs[1] != null) {
-    <mat-icon class="icon-status filled" [class.locked]="accessControlDevice.Outputs[1]">{{
-      accessControlDevice.Outputs[1] ? "lock" : "lock_open_right"
+  @if (accessControlDevice.Inputs && accessControlDevice.Inputs[1] != null) {
+    <mat-icon class="icon-status filled" [class.locked]="accessControlDevice.Inputs[1]">{{
+      accessControlDevice.Inputs[1] ? "lock" : "lock_open_right"
     }}</mat-icon>
   }
 </button>

@@ -1,1 +1,21 @@
-<p>access-control-device-dialog works!</p>
+<div class="content">
+  <div class="header">
+    <h1>{{ data.accessControlDevice.Name }}</h1>
+    <button mat-icon-button class="button-close" align="end" (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="form">
+    @if (data.accessControlDevice.Inputs?.[1] != undefined) {
+      <mat-slide-toggle [(ngModel)]="inputState">{{
+        data.accessControlDevice.Inputs?.[1] ? "Locked" : "Unlock"
+      }}</mat-slide-toggle>
+    }
+    <label
+      ><h3><b>State:</b> {{ data.accessControlDevice.Outputs?.[0] ? "Closed" : "Open" }}</h3>
+    </label>
+    <div class="action">
+      <button mat-raised-button color="primary" (click)="open()">Open</button>
+    </div>
+  </div>
+</div>

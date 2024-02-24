@@ -10,7 +10,9 @@ import {
   FormFieldSelectOptionGroup,
   isPropertyRequired,
 } from "@utopikgoodies/dynamic-form";
-import { AccessControlSystem } from "@utopiksandcastle/accesscontrol-api-client";
+import {
+  AccessControlSystem,
+} from "@utopiksandcastle/accesscontrol-api-client";
 import { Observable, Observer, firstValueFrom } from "rxjs";
 import { ApiService } from "./api.service";
 import { MatDialog } from "@angular/material/dialog";
@@ -29,13 +31,14 @@ export class DynamicFormService {
     private apiService: ApiService
   ) {}
 
+
   generateAccessControlSystemForm(
     accessControlSystem: AccessControlSystem | undefined = undefined
   ): Observable<AbstractFormField[]> {
     return new Observable<AbstractFormField[]>((observer: Observer<AbstractFormField[]>) => {
       this.apiService.accesControleDeviceService.apiV1AccessControlDeviceGet().subscribe({
         next: (accessControlDevices) => {
-          const accessControlDeviceOptionGroups: FormFieldSelectOptionGroup[] = [];
+          const accessControlDeviceOptionGroups: FormFieldSelectOptionGroup<string>[] = [];
           accessControlDevices.forEach((accessControlDevice) => {
             const groupIndex = accessControlDeviceOptionGroups.findIndex(
               (optionGroup) => optionGroup.name === accessControlDevice.Type

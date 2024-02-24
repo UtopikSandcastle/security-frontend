@@ -66,12 +66,12 @@ export class AccessControlSystemsComponent {
   mouseOverRow: any;
 
   constructor(
-    public dialog: MatDialog,
-    iconRegistry: MatIconRegistry,
+    // public dialog: MatDialog,
+    // iconRegistry: MatIconRegistry,
     private apiService: ApiService,
     private dynamicFormService: DynamicFormService
   ) {
-    iconRegistry.setDefaultFontSetClass("material-symbols-outlined");
+    // iconRegistry.setDefaultFontSetClass("material-symbols-outlined");
     this.loadData();
   }
 
