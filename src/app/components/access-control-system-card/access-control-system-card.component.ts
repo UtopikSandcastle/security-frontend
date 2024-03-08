@@ -6,14 +6,13 @@ import {
   AccessControlSystem,
   AccessControlDevice,
 } from "@utopiksandcastle/accesscontrol-api-client";
-import { AccessControlDeviceButtonComponent } from "../access-control-device-button/access-control-device-button.component";
 import { MatIconModule } from "@angular/material/icon";
 import { DynamicFormService } from "../../dynamic-form.service";
 
 @Component({
   selector: "app-access-control-system-card",
   standalone: true,
-  imports: [MatButtonModule, MatCardModule, MatIconModule, AccessControlDeviceButtonComponent],
+  imports: [MatButtonModule, MatCardModule, MatIconModule],
   templateUrl: "./access-control-system-card.component.html",
   styleUrl: "./access-control-system-card.component.scss",
   providers: [ApiService],
@@ -31,15 +30,15 @@ export class AccessControlSystemCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.accessControlSystem?.AccessControlDeviceIds?.forEach((id) => {
-      this.apiService.accesControleDeviceService.apiV1AccessControlDeviceIdGet(id).subscribe({
-        next: (value) => {
-          this.accessControlDevices.push(value);
-        },
-        error: (error) => console.error(error),
-        complete: () => console.info(`${this.accessControlSystem?.Name} System's device loaded`),
-      });
-    });
+    // this.accessControlSystem?.AccessControlDeviceIds?.forEach((id) => {
+    //   this.apiService.accesControleDeviceService.apiV1AccessControlDeviceIdGet(id).subscribe({
+    //     next: (value) => {
+    //       this.accessControlDevices.push(value);
+    //     },
+    //     error: (error) => console.error(error),
+    //     complete: () => console.info(`${this.accessControlSystem?.Name} System's device loaded`),
+    //   });
+    // });
   }
 
   onMouseEnter() {

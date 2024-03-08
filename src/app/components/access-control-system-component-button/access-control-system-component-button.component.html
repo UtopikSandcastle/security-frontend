@@ -1,0 +1,39 @@
+<button mat-icon-button (click)="openDialog(accessControlSystemComponent)">
+  @switch (accessControlSystemComponent.Type) {
+    @case (AccessControlSystemComponentType.Drawbridge) {
+      <mat-icon class="button-icon icon-flip-y" [class.open]="accessControlSystemComponent.Opened"
+        >tools_level</mat-icon
+      >
+    }
+    @case (AccessControlSystemComponentType.Gate) {
+      <mat-icon class="button-icon icon-flip-y" [class.open]="accessControlSystemComponent.Opened"
+        >comedy_mask</mat-icon
+      >
+    }
+    @case (AccessControlSystemComponentType.Portcullis) {
+      <mat-icon class="button-icon icon-flip-y" [class.open]="accessControlSystemComponent.Opened"
+        >fence</mat-icon
+      >
+    }
+    @case (AccessControlSystemComponentType.PosternGate) {
+      <mat-icon class="button-icon" [class.open]="accessControlSystemComponent.Opened"
+        >outdoor_garden</mat-icon
+      >
+    }
+    @case (AccessControlSystemComponentType.Door) {
+      <mat-icon class="button-icon" [class.open]="accessControlSystemComponent.Opened"
+        >gate</mat-icon
+      >
+    }
+    @default {
+      <mat-icon class="button-icon" [class.open]="accessControlSystemComponent.Opened"
+        >question_mark</mat-icon
+      >
+    }
+  }
+  @if (accessControlSystemComponent.IsLockable) {
+    <mat-icon class="icon-status filled" [class.locked]="accessControlSystemComponent.Locked">{{
+      accessControlSystemComponent.Locked ? "lock" : "lock_open_right"
+    }}</mat-icon>
+  }
+</button>

@@ -7,11 +7,13 @@ import {
   FormFieldArray,
   FormFieldInput,
   FormFieldSelect,
-  FormFieldSelectOptionGroup,
+  FormfieldObject,
+  Option,
   isPropertyRequired,
 } from "@utopikgoodies/dynamic-form";
 import {
   AccessControlSystem,
+  AccessControlSystemComponentType,
 } from "@utopiksandcastle/accesscontrol-api-client";
 import { Observable, Observer, firstValueFrom } from "rxjs";
 import { ApiService } from "./api.service";
@@ -31,55 +33,83 @@ export class DynamicFormService {
     private apiService: ApiService
   ) {}
 
-
   generateAccessControlSystemForm(
     accessControlSystem: AccessControlSystem | undefined = undefined
   ): Observable<AbstractFormField[]> {
     return new Observable<AbstractFormField[]>((observer: Observer<AbstractFormField[]>) => {
       this.apiService.accesControleDeviceService.apiV1AccessControlDeviceGet().subscribe({
         next: (accessControlDevices) => {
-          const accessControlDeviceOptionGroups: FormFieldSelectOptionGroup<string>[] = [];
+          const accessControlDeviceOptions: Option<string>[] = [];
           accessControlDevices.forEach((accessControlDevice) => {
-            const groupIndex = accessControlDeviceOptionGroups.findIndex(
-              (optionGroup) => optionGroup.name === accessControlDevice.Type
-            );
-            if (groupIndex > -1) {
-              accessControlDeviceOptionGroups[groupIndex].options.push({
-                value: accessControlDevice.Id as string,
-                viewValue: accessControlDevice.Name,
-              });
-            } else {
-              accessControlDeviceOptionGroups.push({
-                name: accessControlDevice.Type as string,
-                options: [
-                  {
-                    value: accessControlDevice.Id as string,
-                    viewValue: accessControlDevice.Name,
-                  },
-                ],
-              });
-            }
+            accessControlDeviceOptions.push({
+              value: accessControlDevice.Id as string,
+              viewValue: accessControlDevice.Name,
+            });
           });
 
-          let formFieldAccessControlDeviceIds: AbstractFormField[] = [];
-          accessControlSystem?.AccessControlDeviceIds?.forEach((id) => {
-            formFieldAccessControlDeviceIds.push(
-              new FormFieldSelect<string>({
-                name: "AccesControleDevice",
-                title: "Acces Controle Device",
-                optionGroups: accessControlDeviceOptionGroups,
-                value: id,
+          const accessControlSystemComponentTypeOptions: Option<string>[] = Object.keys(
+            AccessControlSystemComponentType
+          ).map((key) => {
+            return {
+              value: key,
+              viewValue:
+                AccessControlSystemComponentType[
+                  key as keyof typeof AccessControlSystemComponentType
+                ],
+            };
+          });
+
+          const componentsFormFields: AbstractFormField[] = [];
+          if (accessControlSystem) {
+            accessControlSystem.Components?.forEach((component) => {
+              componentsFormFields.push(
+                new FormfieldObject({
+                  name: "Component",
+                  title: "Component",
+                  formFields: [
+                    new FormFieldSelect<string>({
+                      name: "AccessControlDeviceId",
+                      title: "Acces Control Device",
+                      options: accessControlDeviceOptions,
+                      value: component.AccessControlDeviceId,
+                    }),
+                    new FormFieldSelect<string>({
+                      name: "Type",
+                      title: "Access Control System Component Type",
+                      required: true,
+                      options: accessControlSystemComponentTypeOptions,
+                      value: component.Type,
+                    }),
+                  ],
+                })
+              );
+            });
+          } else {
+            componentsFormFields.push(
+              new FormfieldObject({
+                name: "Component",
+                title: "Component",
+                formFields: [
+                  new FormFieldSelect<string>({
+                    name: "AccessControlDeviceId",
+                    title: "Acces Control Device",
+                    options: accessControlDeviceOptions,
+                  }),
+                  new FormFieldSelect<string>({
+                    name: "Type",
+                    title: "Access Control System Component Type",
+                    required: true,
+                    options: accessControlSystemComponentTypeOptions,
+                  }),
+                ],
               })
             );
-          });
+          }
 
           observer.next([
             new FormFieldInput<string>({
               name: "Id",
               title: "Id",
-              hint: "",
-              icon: "",
-              placeholder: "",
               hidden: true,
               type: "text",
               value: accessControlSystem?.Id || "",
@@ -87,24 +117,15 @@ export class DynamicFormService {
             new FormFieldInput<string>({
               name: "Name",
               title: "Name",
-              hint: "",
-              icon: "",
-              placeholder: "",
               required: isPropertyRequired(accessControlSystem?.Name),
               type: "text",
               value: accessControlSystem?.Name || "",
             }),
             new FormFieldArray({
-              name: "AccessControlDeviceIds",
-              title: "Access System Devices",
-              subtitle: "",
+              name: "Components",
+              title: "Access Control System Components",
               distinct: true,
-              formFieldModel: new FormFieldSelect<string>({
-                name: "AccesControleDevice",
-                title: "Acces Controle Device",
-                optionGroups: accessControlDeviceOptionGroups,
-              }),
-              formFields: formFieldAccessControlDeviceIds,
+              formFields: componentsFormFields
             }),
           ]);
 
@@ -124,20 +145,24 @@ export class DynamicFormService {
       let action = accessControlSystem ? Action.Update : Action.Create;
 
       this.generateAccessControlSystemForm(accessControlSystem).subscribe({
-        next: (value) => {
+        next: (formFields) => {
           const dialogRef = this.dialog.open(DynamicDialog, {
             disableClose: true,
             width: "90%",
             data: {
-              title: "Create a new Access Control System",
+              title:
+                action == Action.Update
+                  ? "Update Access Control System"
+                  : "Create a new Access Control System",
               buttonActionText: action,
               buttonDelete: action == Action.Update,
-              dynFormFields: value,
+              dynFormFields: formFields,
             },
           });
 
           dialogRef.beforeClosed().subscribe({
             next: (dialogOutput: DialogOutput<AccessControlSystem>) => {
+              console.debug(dialogOutput);
               switch (dialogOutput.action) {
                 case DialogAction.Close:
                   observer.complete();
@@ -156,6 +181,7 @@ export class DynamicFormService {
                           },
                         });
                       break;
+
                     case Action.Update:
                       this.apiService.accessControlSystemService
                         .apiV1AccessControlSystemIdPut(

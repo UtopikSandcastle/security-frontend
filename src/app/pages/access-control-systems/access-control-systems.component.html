@@ -29,13 +29,13 @@
         {{ element.Name }}
       </td>
     </ng-container>
-    <ng-container matColumnDef="accessControlDevices">
+    <ng-container matColumnDef="Components">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Access Control Devices</th>
       <td mat-cell *matCellDef="let element">
-        @for (accessControlDevice of element.AccessControlDevices; track accessControlDevice) {
-          <app-access-control-device-button
-            [accessControlDevice]="accessControlDevice"
-          ></app-access-control-device-button>
+        @for (accessControlSystemComponent of element.Components; track accessControlSystemComponent) {
+          <app-access-control-system-component-button
+            [accessControlSystemComponent]="accessControlSystemComponent"
+          ></app-access-control-system-component-button>
         }
       </td>
     </ng-container>
@@ -43,7 +43,9 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell class="actions-column" *matCellDef="let element">
         @if (mouseOverRow == element) {
-          <button mat-icon-button (click)="openAccessControlSystemDialog(element)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button (click)="openAccessControlSystemDialog(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
           <!-- <button mat-icon-button color="warn"><mat-icon>delete</mat-icon></button> -->
         }
       </td>

@@ -16,11 +16,10 @@ import { MenuButtonComponent } from "../../components/menu-button/menu-button.co
 import { MatTooltipModule } from "@angular/material/tooltip";
 import {
   AccessControlDevice,
-  AccessControlDeviceType,
   AccessControlSystem,
 } from "@utopiksandcastle/accesscontrol-api-client";
-import { AccessControlDeviceButtonComponent } from "../../components/access-control-device-button/access-control-device-button.component";
 import { DynamicFormService } from "../../dynamic-form.service";
+import { AccessControlSystemComponentButtonComponent } from "../../components/access-control-system-component-button/access-control-system-component-button.component";
 
 export enum Action {
   Create = "Create",
@@ -44,7 +43,7 @@ export enum Action {
     MenuButtonComponent,
     MatRippleModule,
     MatTooltipModule,
-    AccessControlDeviceButtonComponent,
+    AccessControlSystemComponentButtonComponent
   ],
   templateUrl: "./access-control-systems.component.html",
   styleUrl: "./access-control-systems.component.scss",
@@ -53,15 +52,12 @@ export class AccessControlSystemsComponent {
   pageTitle = "Access Control System";
   action = Action.Create;
 
-  AccessControlDeviceType = AccessControlDeviceType;
-
-  accessControlSystem: AccessControlSystem = {
-    Name: "",
-    AccessControlDeviceIds: [],
-  };
+  // accessControlSystem: AccessControlSystem = {
+  //   Name: "",
+  // };
 
   dataSource: MatTableDataSource<AccessControlSystem> = new MatTableDataSource();
-  displayedColumns: string[] = ["name", "accessControlDevices", "actions"];
+  displayedColumns: string[] = ["name", "Components", "actions"];
 
   mouseOverRow: any;
 
@@ -76,28 +72,12 @@ export class AccessControlSystemsComponent {
   }
 
   loadData() {
-    let accessControlDevices: AccessControlDevice[] = [];
-    let data: AccessControlSystem[] = [];
+    let accessControlSystems: AccessControlSystem[] = [];
 
-    const accessControlDeviceObservable =
-      this.apiService.accesControleDeviceService.apiV1AccessControlDeviceGet();
-    const accessControlSystemObservable =
-      this.apiService.accessControlSystemService.apiV1AccessControlSystemGet();
-
-    forkJoin([accessControlDeviceObservable, accessControlSystemObservable]).subscribe({
-      next: ([devices, systems]) => {
-        accessControlDevices = devices;
-        data = systems;
-      },
-      error: (err) => console.error(err),
-      complete: () => {
-        this.dataSource.data = data.map((system) => ({
-          ...system,
-          AccessControlDevices: system.AccessControlDeviceIds?.map((id) =>
-            accessControlDevices.find((device) => device.Id === id)
-          ),
-        }));
-      },
+    this.apiService.accessControlSystemService.apiV1AccessControlSystemGet().subscribe({
+      next: (systems) => accessControlSystems.push(...systems),
+      error: (error) => console.error(error),
+      complete: () => (this.dataSource.data = accessControlSystems),
     });
   }
 

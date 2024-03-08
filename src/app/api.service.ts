@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AccessControlDeviceService, AccessControlSystemService } from '@utopiksandcastle/accesscontrol-api-client';
+import { AccessControlDeviceService, AccessControlSystem, AccessControlSystemService } from '@utopiksandcastle/accesscontrol-api-client';
 import { environment } from '../environments/environment';
 
 @Injectable({
